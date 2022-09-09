@@ -1,0 +1,12 @@
+{% block _User_roles %}
+	{% for role in field.value %}
+		{% if role == 'ROLE_ADMIN' %}
+			Admin
+    {% else %}
+            Membre
+	{% endif %}
+
+        {#  {{ role }} : permet d'afficher le role au format ROLE_XXXX #}
+	{% endfor %}
+
+{% endblock %}

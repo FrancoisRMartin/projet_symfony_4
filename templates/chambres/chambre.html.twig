@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Détail{% endblock %}
+
+{% block body %}
+
+    <section class="row article">
+            <article
+                class="col-md-3 mx-auto text-center border border-dark mb-3 p-3 mt-3 mr-1">
+                
+                <h2>{{ chambre.titre }}</h2>
+                
+                <div class="content">
+                    <img src="{{ asset('images/chambres/' ~ chambre.photo ) }}" alt="" class="img-fluid col-md-12">
+                    {{ chambre.descriptionLongue|raw }}
+                    <br>
+                    Prix : {{ chambre.prixJournalier }} €
+                    <br>
+                    {% if app.user %}
+                        <a href="{{ path('cart_add', {id: chambre.id}) }}" class="btn btn-sm btn-warning">Réserver</a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="btn btn-sm btn-success">Se connecter</a>
+                        <a href="{{ path('app_register') }}" class="btn btn-sm btn-warning">Créer un compte</a>
+                    {% endif %}
+                    
+                </div>
+            </article>
+        </section>
+
+    <h1>Suite</h1>
+
+    {{ form_start(formCommande) }}
+        {# {{ formCommande.dateArrivee|date('d/m/Y à H:i:s') }}
+        {{ formCommande.dateDepart|date('d/m/Y à H:i:s') }} #}
+
+        {{ form_row(formCommande.nom, { 
+            label: "Nom",
+            attr: {
+                placeholder: "Votre nom"
+            }
+        }) }}
+        {{ form_row(formCommande.prenom, { 
+            label: "Prénom",
+            attr: {
+                placeholder: "Votre prénom"
+            }
+        }) }}
+        {{ form_row(formCommande.email, { 
+            label: "Email",
+            attr: {
+                placeholder: "Votre email"
+            }
+        }) }}
+        {{ form_row(formCommande.telephone, { 
+            label: "Téléphone"
+        }) }}
+
+        <button type="submit" class="btn btn-primary">Valider ma réservation</button>
+    {{ form_end(formCommande) }}
+
+{% endblock %}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+		<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		<style>
+  			.carousel-inner > .item > img,
+  			.carousel-inner > .item > a > img {
+    			width: 70%;
+    			margin: auto;
+ 			 }
+  </style>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{{ path('app_accueil') }}">Hotel House</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<div class="navbar-nav">
+						<a class="nav-link active" aria-current="page" href="{{ path('app_accueil') }}">Accueil</a>
+						<a class="nav-link" href="{{ path('app_chambres') }}">Liste des chambres</a>
+						{# {% if app.user %}
+							<a class="nav-link" href="{{ path('app_profil') }}">Mon compte</a>
+							<a class="nav-link" href="{{ path('app_panier') }}">Mon panier :
+							{% set nbProduits = app.session.get('qt') %}
+							{% if nbProduits > 0 %}
+								<span class="position-absolute badge rounded-pill bg-danger mt-0 mx-2">{{ nbProduits }}</span>
+							{% endif %}
+							
+							
+							</a>
+						{% endif %} #}
+					</div>				
+				</div>
+				<div class="navbar-nav nav-item active ml-auto">
+						{% if app.user %}
+							{% if is_granted('ROLE_ADMIN') %}
+    							<a class="btn btn-dark btn-primary mx-1" href="{{ path('admin') }}">Backoffice</a>
+							{% endif %}
+            				
+							<a class="btn btn-dark btn-primary mx-1" href="{{ path('app_logout') }}">Déconnexion</a>		
+													
+						{% else %}
+							<a class="btn btn-dark btn-primary mx-1" href="{{ path('app_login') }}">Se connecter</a>
+							<a class="btn btn-dark btn-primary" href="{{ path('app_register') }}">Créer un compte</a>
+						{% endif %}
+						
+						
+				</div>
+			</div>
+		</nav>
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+
+	<div class="container p-4">
+
+		<!-- Section: Social media -->
+		<section class="mb-4 text-center">
+		<!-- Facebook -->
+		<a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+		<!-- Twitter -->
+		<a class="btn btn-primary btn-floating m-1" style="background-color: #55acee" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+		<!-- Google -->
+		<a class="btn btn-primary btn-floating m-1" style="background-color: #dd4b39" href="#!" role="button"><i class="fab fa-google"></i></a>
+		<!-- Instagram -->
+		<a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+		<!-- Linkedin -->
+		<a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
+		<!-- Github -->
+		<a class="btn btn-primary btn-floating m-1" style="background-color: #333333" href="#!" role="button"><i class="fab fa-github"></i></a>
+		</section>
+		<!-- Section: Social media -->
+
+
+
+		<!-- Section: Text -->
+		<section class="mb-4 text-center">
+		<p>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
+			distinctio earum repellat quaerat voluptatibus placeat nam,
+			commodi optio pariatur est quia magnam eum harum corrupti dicta,
+			aliquam sequi voluptate quas.
+		</p>
+		</section>
+		<!-- Section: Text -->
+
+
+	</div>
+
+		<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+		© 2020 Copyright:
+		<a class="text-dark mb-3" href="{{ path('app_accueil') }}">HotelHouse</a>
+	</div>
+
+    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    </body>
+</html>
